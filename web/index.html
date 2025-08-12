@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>三维扫描线算法可视化</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- 侧边栏 -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="app-title">三维扫描线算法可视化</h1>
+        <p class="app-subtitle">最新左储、展储<br>最新右储、并轨<br>演练、统政</p>
+      </div>
+      
+      <div class="control-panel">
+        <h2 class="panel-title">控制面板</h2>
+        
+        <div class="control-group">
+          <label class="control-label">选择算法</label>
+          <select id="algorithm-selector" class="control-select">
+            <option value="rect3d">长方体积并</option>
+            <option value="segint">线段相交检测</option>
+            <option value="polyfill">多边形填充</option>
+            <option value="cp3d">最近点对(3D)</option>
+            <option value="skyline">天际线问题</option>
+          </select>
+        </div>
+
+        <div class="algorithm-panel" id="rect3d-panel">
+          <h3 class="algorithm-title">长方体积并</h3>
+          <div class="control-buttons">
+            <button class="btn btn-primary" id="rect3d-add">添加长方体</button>
+            <button class="btn btn-secondary" id="rect3d-clear">清空</button>
+            <button class="btn btn-accent" id="rect3d-compute">计算体积</button>
+            <button class="btn btn-play" id="rect3d-animate">扫描线动画</button>
+          </div>
+        </div>
+
+        <div class="algorithm-panel" id="segint-panel" style="display:none">
+          <h3 class="algorithm-title">线段相交检测</h3>
+          <div class="control-buttons">
+            <button class="btn btn-primary" id="segint-add">添加线段</button>
+            <button class="btn btn-secondary" id="segint-clear">清空</button>
+            <button class="btn btn-play" id="segint-animate">扫描线动画</button>
+          </div>
+        </div>
+
+        <div class="algorithm-panel" id="polyfill-panel" style="display:none">
+          <h3 class="algorithm-title">多边形填充</h3>
+          <div class="control-buttons">
+            <button class="btn btn-primary" id="polyfill-add">添加顶点</button>
+            <button class="btn btn-secondary" id="polyfill-clear">清空</button>
+            <button class="btn btn-play" id="polyfill-animate">填充动画</button>
+          </div>
+        </div>
+
+        <div class="algorithm-panel" id="cp3d-panel" style="display:none">
+          <h3 class="algorithm-title">最近点对(3D)</h3>
+          <div class="control-buttons">
+            <button class="btn btn-primary" id="cp3d-random">随机生成点</button>
+            <button class="btn btn-secondary" id="cp3d-clear">清空</button>
+            <button class="btn btn-play" id="cp3d-animate">分治动画</button>
+          </div>
+        </div>
+
+        <div class="algorithm-panel" id="skyline-panel" style="display:none">
+          <h3 class="algorithm-title">天际线问题</h3>
+          <div class="control-buttons">
+            <button class="btn btn-primary" id="skyline-add">添加建筑</button>
+            <button class="btn btn-secondary" id="skyline-clear">清空</button>
+            <button class="btn btn-play" id="skyline-animate">扫描线动画</button>
+          </div>
+        </div>
+
+        <div class="view-controls">
+          <h3 class="control-title">视图控制</h3>
+          <div class="control-buttons">
+            <button class="btn btn-view" id="view-reset">重置视角</button>
+            <button class="btn btn-view" id="view-rotate">切换旋转</button>
+            <button class="btn btn-view" id="view-grid">切换网格</button>
+          </div>
+          
+          <div class="color-control">
+            <label class="control-label">背景色：</label>
+            <input type="color" id="bg-color" value="#1a1b3a" class="color-input">
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+      <div class="canvas-container">
+        <canvas id="main-canvas" width="1200" height="800"></canvas>
+        <div class="canvas-overlay">
+          <div class="algorithm-info" id="algorithm-info">
+            <h3 id="info-title">长方体积并算法</h3>
+            <p id="info-description">使用三维扫描线算法计算多个轴对齐长方体的并集体积</p>
+            <div class="info-stats">
+              <span id="info-objects">对象数: 0</span>
+              <span id="info-result">结果: --</span>
+            </div>
+          </div>
+          
+          <div class="animation-controls" id="animation-controls">
+            <button class="control-btn" id="play-pause">⏸️</button>
+            <input type="range" id="speed-slider" min="0.1" max="3" value="1" step="0.1" class="speed-slider">
+            <span class="speed-label">速度: <span id="speed-value">1.0</span>x</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+build/
+.vscode/
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.log
+.DS_Store
+node_modules/
+dist/
